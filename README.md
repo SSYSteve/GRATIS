@@ -6,6 +6,8 @@ This is the official code for the paper: GRATIS: Deep Learning Graph Representat
 
 Note the current code is implemented by different co-authors. In the following weeks, it will be changed accordingly to form a more consistent project.
 
+Nov 29: Uploaded the code of two non-graph experiments.
+
 ## Non-Graph Data
 
 <!---![pipeline_nongraph](/figures/pipeline_nongraph.png)--->
