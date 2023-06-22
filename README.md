@@ -1,6 +1,10 @@
 # GRATIS: Deep Learning Graph Representation with Task-specific Topology and Multi-dimensional Edge Features
 
-This is the official code for the paper: GRATIS: Deep Learning Graph Representation with Task-specific Topology and Multi-dimensional Edge Features
+* This is the official code for the paper: [GRATIS: Deep Learning Graph Representation with Task-specific Topology and Multi-dimensional Edge Features](https://arxiv.org/abs/2211.12482).
+* We have written a [tutorial](https://github.com/SSYSteve/Learning-Graph-Representation-with-Task-specific-Topology-and-Multi-dimensional-Edge-Features/blob/main/Tutorial/gratis.ipynb) to make the code easy to follow, where we have provided step-by-step explanations with respect to both graph and non-graph input.
+
+
+
 ## Graph Data
 
 <!---![pipeline_graph](/figures/pipeline_graph.png)--->
