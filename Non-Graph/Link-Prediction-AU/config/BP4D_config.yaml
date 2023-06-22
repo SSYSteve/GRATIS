@@ -1,0 +1,3 @@
+dataset_path: '/home/selim/ME-GraphAU-main/data/BP4D'
+num_classes: 12
+neighbor_num: 4
