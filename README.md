@@ -114,10 +114,12 @@ In the manuscript, we tried and reported the proposed GRATIS on three different 
 **Please kindly cite our papers if you used or inspired by our idea:**
 
 @article{song2022gratis,
-
   title={Gratis: Deep learning graph representation with task-specific topology and multi-dimensional edge features},
+  
   author={Song, Siyang and Song, Yuxin and Luo, Cheng and Song, Zhiyuan and Kuzucu, Selim and Jia, Xi and Guo, Zhijiang and Xie, Weicheng and Shen, Linlin and Gunes, Hatice},
+  
   journal={arXiv preprint arXiv:2211.12482},
+  
   year={2022}
   
 }
@@ -125,10 +127,13 @@ In the manuscript, we tried and reported the proposed GRATIS on three different 
 @inproceedings{luo2022learning,
 
   title     = {Learning Multi-dimensional Edge Feature-based AU Relation Graph for Facial Action Unit Recognition},
+  
   author    = {Luo, Cheng and Song, Siyang and Xie, Weicheng and Shen, Linlin and Gunes, Hatice},
-  booktitle = {Proceedings of the Thirty-First International Joint Conference on
-               Artificial Intelligence, {IJCAI-22}},
+  
+  booktitle = {Proceedings of the Thirty-First International Joint Conference on Artificial Intelligence, {IJCAI-22}},
+  
   pages     = {1239--1246},
+  
   year      = {2022}
   
 }
