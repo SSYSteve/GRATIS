@@ -18,6 +18,10 @@ import dgl
     # We also assign 1*1 random values for the edge feature denoted as 'feat'.
 
 
+##############################################################################################
+####################################  Input Graph D_in  ######################################
+##############################################################################################
+
 u, v = torch.tensor([0, 0, 0 , 1, 1]), torch.tensor([1, 2, 3, 2, 3])
 g = dgl.graph((u, v))
 d_n = 3
@@ -27,6 +31,10 @@ g.edata['feat'] = torch.rand(g.num_edges(), d_f)
 
 print('Original D_in   ', g)
 
+##############################################################################################
+####################################  Graph Definition  ######################################
+##############################################################################################
+
 from gd import GD
 
 graph_definition = GD()
@@ -34,7 +42,9 @@ graph_definition = GD()
 input_graph, input_node_fea, input_edge_fea = graph_definition(g)
 
 
-# Task-specific Topology Prediction.
+##############################################################################################
+########################  Task-specific Topology Prediction  #################################
+##############################################################################################
 
 from ttp import TTP
 
@@ -52,7 +62,11 @@ hidden_dim = 13
 embedding_h = nn.Linear(in_dim, hidden_dim)
 embed_ttp_node = embedding_h(ttp_node)
 
-# Multi-dimensional Edge Feature Generation
+
+##############################################################################################
+########################  Multi-dimensional Edge Feature Generation  #########################
+##############################################################################################
+# 
 from mefg import MEFG
 max_node_num = 100
 mefg = MEFG(in_dim,hidden_dim, max_node_num)
@@ -62,4 +76,4 @@ print('Oringinal Edge Feature   ', input_edge_fea)
 print('TTP Edge Feature', ttp_feature)
 print('MEFG learned Multiple Edge Feature   ', learned_multi_edge)
 
-# Task-specific Analysis...
+# Further Analysis ...
