@@ -8,7 +8,7 @@ from tqdm import tqdm
 import logging
 import matplotlib.pyplot as plt
 from sklearn.metrics import f1_score
-from model.MEFL import MEFARG
+from model.MEFL import GRATIS
 
 
 def get_dataloader(conf):
@@ -114,7 +114,7 @@ def main(conf):
 
     es = EarlyStopping(patience= 10 )
 
-    net = MEFARG(num_classes=4, backbone=conf.arc)
+    net = GRATIS(num_classes=4, backbone=conf.arc)
     logging.info("Resume form | {} ]".format('Stage1_73.06'))
     net = load_state_dict(net, '/content/drive/My Drive/MEFR/sc43/{}.pth'.format(72.63861799944274))
 
