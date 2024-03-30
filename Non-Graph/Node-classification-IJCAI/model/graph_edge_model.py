@@ -28,13 +28,13 @@ class CrossAttn(nn.Module):
         return out
 
 
-class GEM(nn.Module):
+class MEFG(nn.Module):
     def __init__(self, in_channels, num_classes):
-        super(GEM, self).__init__()
+        super(MEFG, self).__init__()
         self.in_channels = in_channels
         self.num_classes = num_classes
-        self.FAM = CrossAttn(self.in_channels)
-        self.ARM = CrossAttn(self.in_channels)
+        self.VCR = CrossAttn(self.in_channels)
+        self.VVR = CrossAttn(self.in_channels)
         self.edge_proj = nn.Linear(in_channels, in_channels)
         self.bn = nn.BatchNorm2d(self.num_classes * self.num_classes)
 
@@ -45,10 +45,10 @@ class GEM(nn.Module):
     def forward(self, class_feature, global_feature):
         B, N, D, C = class_feature.shape
         global_feature = global_feature.repeat(1, N, 1).view(B, N, D, C)
-        feat = self.FAM(class_feature, global_feature)
+        feat = self.VCR(class_feature, global_feature)
         feat_end = feat.repeat(1, 1, N, 1).view(B, -1, D, C)
         feat_start = feat.repeat(1, N, 1, 1).view(B, -1, D, C)
-        feat = self.ARM(feat_start, feat_end)
+        feat = self.VVR(feat_start, feat_end)
         edge = self.bn(self.edge_proj(feat))
         return edge
 

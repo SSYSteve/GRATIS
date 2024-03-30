@@ -7,7 +7,7 @@ import torch.optim as optim
 from tqdm import tqdm
 import logging
 
-from model.ANFL import MEFARG
+from model.ANFL import GRATIS
 from dataset import *
 from utils import *
 from conf import get_config,set_logger,set_outdir,set_env
@@ -82,7 +82,7 @@ def main(conf):
 
     logging.info("Fold: [{} | {}  val_data_num: {} ]".format(conf.fold, conf.N_fold, val_data_num))
 
-    net = MEFARG(num_classes=conf.num_classes, backbone=conf.arc, neighbor_num=conf.neighbor_num, metric=conf.metric)
+    net = GRATIS(num_classes=conf.num_classes, backbone=conf.arc, neighbor_num=conf.neighbor_num, metric=conf.metric)
     # resume
     if conf.resume != '':
         logging.info("Resume form | {} ]".format(conf.resume))

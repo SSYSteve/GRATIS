@@ -7,7 +7,7 @@ import torch.optim as optim
 from tqdm import tqdm
 import logging
 
-from model.MEFL import MEFARG
+from model.MEFL import GRATIS
 from dataset import *
 from utils import *
 from conf import get_config,set_logger,set_outdir,set_env
@@ -87,7 +87,7 @@ def main(conf):
     train_loader,val_loader,train_data_num,val_data_num = get_dataloader(conf)
     train_weight = torch.from_numpy(np.loadtxt(os.path.join(conf.dataset_path, 'list', conf.dataset+'_weight_fold'+str(conf.fold)+'.txt')))
     logging.info("Fold: [{} | {}  val_data_num: {} ]".format(conf.fold + 1, conf.N_fold, val_data_num))
-    net = MEFARG(num_classes=conf.num_classes, backbone=conf.arc)
+    net = GRATIS(num_classes=conf.num_classes, backbone=conf.arc)
 
     # resume
     if conf.resume != '':
