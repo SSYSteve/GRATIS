@@ -22,8 +22,8 @@ class CrossTransformer(nn.Module):
         super().__init__()
         
         encoder_layer = CrossTransformerEncoder(d_model, nhead, attention_type)
-        self.FAM_layers = nn.ModuleList([encoder_layer for _ in range(layer_nums)])
-        self.ARM_layers = nn.ModuleList([encoder_layer for _ in range(layer_nums)])
+        self.VCR_layers = nn.ModuleList([encoder_layer for _ in range(layer_nums)])
+        self.VVR_layers = nn.ModuleList([encoder_layer for _ in range(layer_nums)])
         
         self._reset_parameters()
 
@@ -45,21 +45,21 @@ class CrossTransformer(nn.Module):
         kfea = kfea.unsqueeze(1).repeat(1, N, 1) #[B,N,D]
         
         mask1 = torch.ones([B,N]).to(qfea.device)
-        for layer in self.FAM_layers:
+        for layer in self.VCR_layers:
             qfea = layer(qfea, kfea, mask0, mask1)
             #kfea = layer(kfea, qfea, mask1, mask0)
         
         qfea_end = qfea.repeat(1,1,N).view(B,-1,D)
         qfea_start = qfea.repeat(1,N,1).view(B,-1,D)
         #mask2 = mask0.repeat([1,N])
-        for layer in self.ARM_layers:
+        for layer in self.VVR_layers:
             #qfea_start = layer(qfea_start, qfea_end, mask2, mask2)
             qfea_start = layer(qfea_start, qfea_end)
 
         return qfea_start.view([B,N,N,D]) #[B,N*N,D]
     
 
-class MERG(nn.Module):
+class MEFG(nn.Module):
     
     def __init__(self, in_dim,hidden_dim, max_node_num, global_layer_num = 2, dropout = 0.1):
         super().__init__()

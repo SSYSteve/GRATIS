@@ -22,8 +22,8 @@ class CrossTransformer(nn.Module):
         super().__init__()
         
         encoder_layer = CrossTransformerEncoder(d_model, nhead, attention_type)
-        self.FAM_layers = nn.ModuleList([encoder_layer for _ in range(layer_nums)])
-        self.ARM_layers = nn.ModuleList([encoder_layer for _ in range(layer_nums)])
+        self.VCR_layers = nn.ModuleList([encoder_layer for _ in range(layer_nums)])
+        self.VVR_layers = nn.ModuleList([encoder_layer for _ in range(layer_nums)])
         
         self._reset_parameters()
 
@@ -46,20 +46,20 @@ class CrossTransformer(nn.Module):
         kfea = kfea.unsqueeze(1).repeat(1, N, 1) #[B,N,D]
         
         mask1 = torch.ones([B,N]).to(qfea.device)
-        for layer in self.FAM_layers:
+        for layer in self.VCR_layers:
             qfea = layer(qfea, kfea, mask0, mask1)
             #kfea = layer(kfea, qfea, mask1, mask0)
         
         qfea_end = qfea.repeat(1,1,N).view(B,-1,D)
         qfea_start = qfea.repeat(1,N,1).view(B,-1,D)
         #mask2 = mask0.repeat([1,N])
-        for layer in self.ARM_layers:
+        for layer in self.VVR_layers:
             #qfea_start = layer(qfea_start, qfea_end, mask2, mask2)
             qfea_start = layer(qfea_start, qfea_end)
 
         return qfea_start.view([B,N,N,D]) #[B,N*N,D]
     
-class GTP(nn.Module):
+class TTP(nn.Module):
     def __init__(self, in_dim, hidden_dim, edge_thresh):
         super().__init__()
         self.proj_g1 = nn.Linear(in_dim,hidden_dim**2) #lr_g
@@ -98,7 +98,7 @@ class GTP(nn.Module):
 
         return g    
 
-class MERG(nn.Module):
+class MEFG(nn.Module):
     
     def __init__(self, in_dim,hidden_dim, max_node_num, global_layer_num = 2, dropout = 0.1):
         super().__init__()
@@ -213,13 +213,13 @@ class GATNet(nn.Module):
         self.MLP_layer = MLPReadout(out_dim, n_classes)
         
         max_node_num = net_params['node_num']
-        self.gtp = GTP(in_dim, hidden_dim * num_heads, edge_thresh=0.8)
-        self.merg = MERG(hidden_dim * num_heads,hidden_dim * num_heads, max_node_num)
+        self.ttp = TTP(in_dim, hidden_dim * num_heads, edge_thresh=0.8)
+        self.mefg = MEFG(hidden_dim * num_heads,hidden_dim * num_heads, max_node_num)
         
 
     def forward(self, g, h, e):
 
-        lr_g = self.gtp(g,h,e)
+        lr_g = self.ttp(g,h,e)
         g = lr_g
         
         h = self.embedding_h(h)
@@ -230,7 +230,7 @@ class GATNet(nn.Module):
         #    e = torch.ones_like(e).to(self.device)
         #e = self.embedding_e(e)
         e = None
-        lr_e = self.merg(g,h,e)
+        lr_e = self.mefg(g,h,e)
         e = lr_e
         
         for conv in self.layers:

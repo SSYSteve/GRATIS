@@ -8,7 +8,7 @@ from layers.gated_gcn_layer import GatedGCNLayer, GatedGCNLayerEdgeFeatOnly, Gat
 from layers.mlp_readout_layer import MLPReadout
 
 
-class MERG(nn.Module):
+class MEFG(nn.Module):
     
     def __init__(self, in_dim,hidden_dim, dropout = 0.1):
         super().__init__()
@@ -87,14 +87,14 @@ class GatedGCNNet(nn.Module):
         
         self.MLP_layer = MLPReadout(2*out_dim, 1)
 
-        self.merg = MERG(in_dim, hidden_dim)
+        self.mefg = MEFG(in_dim, hidden_dim)
 
         
     def forward(self, g, h, e, h_pos_enc=None):
         #print('h',h.shape) #[235868, 128]
         #print('e',e.shape) #[2358104, 2]
 
-        e = self.merg(g,h,e)
+        e = self.mefg(g,h,e)
         
         h = self.embedding_h(h.float())
         if self.pos_enc:

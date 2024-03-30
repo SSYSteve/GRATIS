@@ -12,7 +12,7 @@ import dgl
 from layers.gat_layer import GATLayer, CustomGATLayer, CustomGATLayerEdgeReprFeat, CustomGATLayerIsotropic
 from layers.mlp_readout_layer import MLPReadout
 
-class MERG(nn.Module):
+class MEFG(nn.Module):
     
     def __init__(self, in_dim,hidden_dim, dropout = 0.1):
         super().__init__()
@@ -92,11 +92,11 @@ class GATNet(nn.Module):
         self.layers.append(self.layer_type(hidden_dim * num_heads, out_dim, 1, dropout, self.batch_norm, self.residual))
         self.MLP_layer = MLPReadout(2*out_dim, 1)
         
-        self.merg = MERG(in_dim, hidden_dim)
+        self.mefg = MEFG(in_dim, hidden_dim)
         
     def forward(self, g, h, e):
         
-        e = self.merg(g,h,e)
+        e = self.mefg(g,h,e)
         
         h = self.embedding_h(h.float())
         h = self.in_feat_dropout(h)
