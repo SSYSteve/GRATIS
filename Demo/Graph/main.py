@@ -52,16 +52,15 @@ print('TTP learned graph   ', after_ttp_graph)
 ttp_node = after_ttp_graph.ndata['feat'][:]
 ttp_feature = after_ttp_graph.edata['feat']
 
-in_dim = 3
-hidden_dim = 13
-embedding_h = nn.Linear(in_dim, hidden_dim)
-embed_ttp_node = embedding_h(ttp_node)
-
 ##############################################################################################
 ########################  Multi-dimensional Edge Feature Generation  #########################
 ##############################################################################################
 
 from mefg import MEFG
+in_dim = 3
+hidden_dim = 13
+embedding_h = nn.Linear(in_dim, hidden_dim)
+embed_ttp_node = embedding_h(ttp_node)
 max_node_num = 100
 mefg = MEFG(in_dim,hidden_dim, max_node_num)
 learned_multi_edge = mefg(after_ttp_graph,embed_ttp_node,e=None)
