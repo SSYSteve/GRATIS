@@ -10,7 +10,7 @@ from dgl.nn.pytorch import GATConv
     https://arxiv.org/abs/1710.10903
 """
 
-class MERG(nn.Module):
+class MEFG(nn.Module):
     def __init__(self, in_dim, hidden_dim):
         super().__init__()
         self.bn_node_lr_e_local = nn.BatchNorm1d(hidden_dim)
@@ -180,14 +180,14 @@ class CustomGATLayer(nn.Module):
         self.heads = nn.ModuleList()
         for i in range(num_heads):
             self.heads.append(CustomGATHeadLayer(in_dim, out_dim, dropout, batch_norm))
-        self.merge = 'cat' 
+        self.mefge = 'cat' 
 
     def forward(self, g, h, e):
         h_in = h # for residual connection
         
         head_outs = [attn_head(g, h) for attn_head in self.heads]
 
-        if self.merge == 'cat':
+        if self.mefge == 'cat':
             h = torch.cat(head_outs, dim=1)
         else:
             h = torch.mean(torch.stack(head_outs))
@@ -221,7 +221,7 @@ class CustomGATHeadLayerEdgeReprFeat(nn.Module):
         
         #self.edge_lr = edge_lr
         #if self.edge_lr:
-        #    self.merg = MERG(in_dim, out_dim)
+        #    self.mefg = MEFG(in_dim, out_dim)
 
     def edge_attention(self, edges):
         z = torch.cat([edges.data['z_e'], edges.src['z_h'], edges.dst['z_h']], dim=1)
@@ -241,7 +241,7 @@ class CustomGATHeadLayerEdgeReprFeat(nn.Module):
         
         #g.ndata['local']  = h
         #if self.edge_lr:
-        #    e = self.merg(g, h, e)
+        #    e = self.mefg(g, h, e)
             
         z_h = self.fc_h(h)
         z_e = self.fc_e(e)
@@ -287,17 +287,17 @@ class CustomGATLayerEdgeReprFeat(nn.Module):
 
         for i in range(num_heads):
             self.heads.append(CustomGATHeadLayerEdgeReprFeat(in_dim, out_dim, dropout, batch_norm))
-        self.merge = 'cat' 
+        self.mefge = 'cat' 
         
         self.edge_lr = edge_lr
         if self.edge_lr:
-            self.merg = MERG(in_dim, in_dim)
+            self.mefg = MEFG(in_dim, in_dim)
 
     def forward(self, g, h, e):
         
         g.ndata['local']  = h
         if self.edge_lr:
-            e = self.merg(g, h, e)
+            e = self.mefg(g, h, e)
             
         h_in = h # for residual connection
         e_in = e
@@ -309,7 +309,7 @@ class CustomGATLayerEdgeReprFeat(nn.Module):
             head_outs_h.append(h_temp)
             head_outs_e.append(e_temp)
 
-        if self.merge == 'cat':
+        if self.mefge == 'cat':
             h = torch.cat(head_outs_h, dim=1)
             e = torch.cat(head_outs_e, dim=1)
         else:
@@ -380,14 +380,14 @@ class CustomGATLayerIsotropic(nn.Module):
         self.heads = nn.ModuleList()
         for i in range(num_heads):
             self.heads.append(CustomGATHeadLayerIsotropic(in_dim, out_dim, dropout, batch_norm))
-        self.merge = 'cat' 
+        self.mefge = 'cat' 
 
     def forward(self, g, h, e):
         h_in = h # for residual connection
         
         head_outs = [attn_head(g, h) for attn_head in self.heads]
 
-        if self.merge == 'cat':
+        if self.mefge == 'cat':
             h = torch.cat(head_outs, dim=1)
         else:
             h = torch.mean(torch.stack(head_outs))
