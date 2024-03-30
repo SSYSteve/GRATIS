@@ -103,9 +103,9 @@ class Head(nn.Module):
         return cl
 
 
-class MEFARG(nn.Module):
+class GRATIS(nn.Module):
     def __init__(self, num_classes=12, backbone='swin_transformer_base', neighbor_num=4, metric='dots'):
-        super(MEFARG, self).__init__()
+        super(GRATIS, self).__init__()
         if 'transformer' in backbone:
             if backbone == 'swin_transformer_tiny':
                 self.backbone = swin_transformer_tiny()

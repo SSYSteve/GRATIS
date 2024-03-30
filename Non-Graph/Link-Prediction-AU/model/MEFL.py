@@ -7,7 +7,7 @@
 # from .swin_transformer import swin_transformer_tiny, swin_transformer_small, swin_transformer_base
 # from .resnet import resnet18, resnet50, resnet101
 # from .graph import create_e_matrix
-# from .graph_edge_model import GEM
+# from .graph_edge_model import MEFG
 # from .basic_block import *
 #
 #
@@ -229,7 +229,7 @@
 #         # Input: the feature maps x from backbone
 #         # Output: the AU recognition probabilities cl And the logits cl_edge of edge features for classification
 #         # Modules: 1. AFG extracts individual Au feature maps U_1 ---- U_N
-#         #          2. GEM: graph edge modeling for learning multi-dimensional edge features
+#         #          2. MEFG: graph edge modeling for learning multi-dimensional edge features
 #         #          3. Gated-GCN for graph learning with node and multi-dimensional edge features
 #         # sc: individually calculate cosine similarity between node features and a trainable vector.
 #         # edge fc: for edge prediction
@@ -241,7 +241,7 @@
 #             layer = LinearBlock(self.in_channels, self.in_channels)
 #             class_linear_layers += [layer]
 #         self.class_linears = nn.ModuleList(class_linear_layers)
-#         self.edge_extractor = GEM(self.in_channels, self.num_classes)
+#         self.edge_extractor = MEFG(self.in_channels, self.num_classes)
 #         self.gnn = GNN(self.in_channels, self.num_classes)
 #         self.sc = nn.Parameter(torch.FloatTensor(torch.zeros(self.num_classes, self.in_channels)))
 #         self.edge_fc = nn.Linear(self.in_channels, 4)
@@ -273,9 +273,9 @@
 #         return cl, cl_edge
 #
 #
-# class MEFARG(nn.Module):
+# class GRATIS(nn.Module):
 #     def __init__(self, num_classes=12, backbone='swin_transformer_base'):
-#         super(MEFARG, self).__init__()
+#         super(GRATIS, self).__init__()
 #         if 'transformer' in backbone:
 #             if backbone == 'swin_transformer_tiny':
 #                 self.backbone = swin_transformer_tiny()
@@ -320,7 +320,7 @@ import math
 from .swin_transformer import swin_transformer_tiny, swin_transformer_small, swin_transformer_base
 from .resnet import resnet18, resnet50, resnet101
 from .graph import create_e_matrix
-from .graph_edge_model import GEM
+from .graph_edge_model import MEFG
 from .basic_block import *
 from .graph import normalize_digraph
 
@@ -603,7 +603,7 @@ class Head(nn.Module):
         # Input: the feature maps x from backbone
         # Output: the AU recognition probabilities cl And the logits cl_edge of edge features for classification
         # Modules: 1. AFG extracts individual Au feature maps U_1 ---- U_N
-        #          2. GEM: graph edge modeling for learning multi-dimensional edge features
+        #          2. MEFG: graph edge modeling for learning multi-dimensional edge features
         #          3. Gated-GCN for graph learning with node and multi-dimensional edge features
         # sc: individually calculate cosine similarity between node features and a trainable vector.
         # edge fc: for edge prediction
@@ -615,7 +615,7 @@ class Head(nn.Module):
             layer = LinearBlock(self.in_channels, self.in_channels)
             class_linear_layers += [layer]
         self.class_linears = nn.ModuleList(class_linear_layers)
-        self.edge_extractor = GEM(self.in_channels, self.num_classes)
+        self.edge_extractor = MEFG(self.in_channels, self.num_classes)
         self.gnn = GNN(self.in_channels, self.num_classes)
         self.sc = nn.Parameter(torch.FloatTensor(torch.zeros(self.num_classes, self.in_channels)))
         self.edge_fc = nn.Linear(self.in_channels, 4)
@@ -663,9 +663,9 @@ class Head(nn.Module):
         return cl, cl_edge
 
 
-class MEFARG(nn.Module):
+class GRATIS(nn.Module):
     def __init__(self, num_classes=12, backbone='swin_transformer_base'):
-        super(MEFARG, self).__init__()
+        super(GRATIS, self).__init__()
         if 'transformer' in backbone:
             if backbone == 'swin_transformer_tiny':
                 self.backbone = swin_transformer_tiny()

@@ -9,7 +9,7 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 import math
 from .graph import create_e_matrix
-from .graph_edge_model import GEM
+from .graph_edge_model import MEFG
 from .basic_block import *
 
 # GAT Used to Learn Multi-dimensional Edge Features and Node Features

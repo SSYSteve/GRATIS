@@ -7,7 +7,7 @@ import torch.optim as optim
 from tqdm import tqdm
 import logging
 
-from model.MEFL import MEFARG
+from model.MEFL import GRATIS
 from dataset import *
 from utils import *
 from conf import get_config,set_logger,set_outdir,set_env
@@ -84,7 +84,7 @@ def main(conf):
     logging.info("Fold: [{} | {}  val_data_num: {} ]".format(conf.fold, conf.N_fold, val_data_num))
     logging.info("GNN Type: {}   Feed Type: {}".format(conf.gnn_type, conf.feed_type))
 
-    net = MEFARG(num_classes=conf.num_classes, backbone=conf.arc, gnn_type=conf.gnn_type, feed_type=conf.feed_type)
+    net = GRATIS(num_classes=conf.num_classes, backbone=conf.arc, gnn_type=conf.gnn_type, feed_type=conf.feed_type)
     net = getFrozenMEFARG(net=net, conf=conf)
     # resume
     if conf.resume != '':
