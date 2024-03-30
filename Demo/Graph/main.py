@@ -9,18 +9,14 @@ import dgl
 # However, for different tasks, the code might need some tweaking.
 # For easier reproduction of our reported results, we included the task-specific code in separate folders.
 
-
-# 
+##############################################################################################
+####################################  Input Graph D_in  ######################################
+##############################################################################################
 
 # We start with a randomly initialized graph.
     # We first create a simple graph with four nodes and five edges.
     # We then assign 1*3 random values for the node feature denoted as 'feat'.
     # We also assign 1*1 random values for the edge feature denoted as 'feat'.
-
-
-##############################################################################################
-####################################  Input Graph D_in  ######################################
-##############################################################################################
 
 u, v = torch.tensor([0, 0, 0 , 1, 1]), torch.tensor([1, 2, 3, 2, 3])
 g = dgl.graph((u, v))
@@ -40,7 +36,6 @@ from gd import GD
 graph_definition = GD()
 
 input_graph, input_node_fea, input_edge_fea = graph_definition(g)
-
 
 ##############################################################################################
 ########################  Task-specific Topology Prediction  #################################
@@ -62,11 +57,10 @@ hidden_dim = 13
 embedding_h = nn.Linear(in_dim, hidden_dim)
 embed_ttp_node = embedding_h(ttp_node)
 
-
 ##############################################################################################
 ########################  Multi-dimensional Edge Feature Generation  #########################
 ##############################################################################################
-# 
+
 from mefg import MEFG
 max_node_num = 100
 mefg = MEFG(in_dim,hidden_dim, max_node_num)
