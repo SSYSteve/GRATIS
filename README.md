@@ -4,14 +4,14 @@
 * To quickly follow the core idea of our methods, we have removed all the unnecessary dependencies and included a clean version of the code in the [**Demo**](https://github.com/SSYSteve/GRATIS/tree/main/Demo) folder.
 * To further clarify the code, we have provided a detailed [**Tutorial**](https://github.com/SSYSteve/Learning-Graph-Representation-with-Task-specific-Topology-and-Multi-dimensional-Edge-Features/blob/main/Tutorial/gratis.ipynb), which contains step-by-step explanations for both graph and non-graph input.
 * To reproduce the reported results in the paper, one can directly run the bash files in the main directory with
-```
-bash run_graph_graph_classificaiton.sh 
-bash run_graph_link_prediction.sh 
-bash run_graph_node_classificaiton.sh 
-bash run_non-graph_graph_classificaiton.sh 
-bash run_non-graph_link_prediction.sh
-bash run_non-graph_node_classificaiton.sh
-```
+      ```
+      bash run_graph_graph_classificaiton.sh 
+      bash run_graph_link_prediction.sh 
+      bash run_graph_node_classificaiton.sh 
+      bash run_non-graph_graph_classificaiton.sh 
+      bash run_non-graph_link_prediction.sh
+      bash run_non-graph_node_classificaiton.sh
+      ```
 
 
 
