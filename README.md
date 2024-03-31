@@ -13,7 +13,10 @@
       bash run_non-graph_node_classificaiton.sh
       ```
 
-
+<p align="center">
+<!---![pipeline](/Tutorial/pipeline.png)--->
+<img src="/Tutorial/pipeline.png" alt="drawing" width="688"/>
+</p>
 
 ## Graph Data
 
