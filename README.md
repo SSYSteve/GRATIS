@@ -1,14 +1,13 @@
-# GRATIS: Deep Learning Graph Representation with Task-specific Topology and Multi-dimensional Edge Features
+# GRATIS
 
 * This is the official code for the paper: [GRATIS: Deep Learning Graph Representation with Task-specific Topology and Multi-dimensional Edge Features](https://arxiv.org/abs/2211.12482).
-* We have written a detailed [**Tutorial**](https://github.com/SSYSteve/Learning-Graph-Representation-with-Task-specific-Topology-and-Multi-dimensional-Edge-Features/blob/main/Tutorial/gratis.ipynb) to make the code easy to follow, where we have provided step-by-step explanations with respect to both graph and non-graph input.
+* To quickly follow the core idea of our methods, we have removed all the unnecessary dependencies and included a clean version of the code in the [**Demo**](https://github.com/SSYSteve/GRATIS/tree/main/Demo) folder.
+* To further clarify the code, we have provided a detailed [**Tutorial**](https://github.com/SSYSteve/Learning-Graph-Representation-with-Task-specific-Topology-and-Multi-dimensional-Edge-Features/blob/main/Tutorial/gratis.ipynb), which contains step-by-step explanations for both graph and non-graph input.
+* To reproduce the reported results in the paper, one can directly run the bash files in the main directory with ```bash run_xxxxxx.sh```.
 
 
 
 ## Graph Data
-
-<!---![pipeline_graph](/figures/pipeline_graph.png)--->
-<img src="/figures/pipeline_graph.png" alt="drawing" width="700"/>
 
 Six graph datasets are employed (two for each task): (i) Graph classification: the MNIST and CIFAR10 datasets are employed; (ii) Vertex (node) classification: the PATTERN and CLUSTER datasets are employed; and (iii) Edge link prediction: the TSP and COLLAB datasets are employed.
 
@@ -94,9 +93,6 @@ python main_TSP_edge_classification_best_model.py --dataset TSP \
 
 ## Non-Graph Data
 
-<!---![pipeline_nongraph](/figures/pipeline_nongraph.png)--->
-<img src="/figures/pipeline_nongraph.png" alt="drawing" width="700"/>
-
 In the manuscript, we tried and reported the proposed GRATIS on three different tasks with five different face image datasets. Specifically, for i) Graph Classification, the FER 2013 and RAF-DB facial expression recognition (FER) datasets are employed, where we produce a graph for each face image, and predict image-level facial expressions (i.e., seven class classification problem) based on the produced graph; for ii) Node Classification, the BP4D, and DISFA Facial Action Units (AUs) Recognition datasets are employed, where the task is to jointly predict multiple AUs’ activations from each face image; for iii) Link Prediction, the BP4D and DISFA datasets are again employed, where we aim to recognize the co-occurrence pattern between a pair of AUs (vertices), i.e., the edge pattern of the corresponding AUs.
 
 
@@ -108,18 +104,21 @@ In the manuscript, we tried and reported the proposed GRATIS on three different 
 
 [2023 Jun 22] Uploaded a brief tutorial.
 
+[2024 Mar 31] Updated a clean version of the code in Demo.
 
 ## Citation 
 
-**Please kindly cite our papers if you used or inspired by our idea:**
+**Please kindly cite our papers if you used or were inspired by our idea:**
 
+```
 @article{song2022gratis,\
   title={Gratis: Deep learning graph representation with task-specific topology and multi-dimensional edge features},\
   author={Song, Siyang and Song, Yuxin and Luo, Cheng and Song, Zhiyuan and Kuzucu, Selim and Jia, Xi and Guo, Zhijiang and Xie, Weicheng and Shen, Linlin and Gunes, Hatice},\
   journal={arXiv preprint arXiv:2211.12482},\
   year={2022}\
 }
-
+```
+```
 @inproceedings{luo2022learning,\
   title     = {Learning Multi-dimensional Edge Feature-based AU Relation Graph for Facial Action Unit Recognition},\
   author    = {Luo, Cheng and Song, Siyang and Xie, Weicheng and Shen, Linlin and Gunes, Hatice},\
@@ -128,4 +127,4 @@ In the manuscript, we tried and reported the proposed GRATIS on three different 
   year      = {2022}\
   
 }
-
+```
