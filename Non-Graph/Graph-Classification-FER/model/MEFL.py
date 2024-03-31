@@ -286,7 +286,8 @@ class GRATIS(nn.Module):
                 self.backbone = resnet101()
             else:
                 self.backbone = resnet50()
-            self.in_channels = self.backbone.fc.weight.shape[1]
+            # self.in_channels = self.backbone.fc.weight.shape[1]
+            self.in_channels = self.backbone.fc[0].weight.shape[1]
             self.out_channels = self.in_channels // 4
             self.backbone.fc = None
         else:
