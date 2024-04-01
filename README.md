@@ -5,12 +5,12 @@
 * To further clarify the code, we have provided a detailed [**Tutorial**](https://github.com/SSYSteve/Learning-Graph-Representation-with-Task-specific-Topology-and-Multi-dimensional-Edge-Features/blob/main/Tutorial/gratis.ipynb), which contains step-by-step explanations for both graph and non-graph input.
 * To reproduce the reported results in the paper, one can directly run the bash files in the main directory with
       ```
-      bash run_graph_graph_classificaiton.sh \
-      bash run_graph_link_prediction.sh \
-      bash run_graph_node_classificaiton.sh \
-      bash run_non-graph_graph_classificaiton.sh \
-      bash run_non-graph_link_prediction.sh\
-      bash run_non-graph_node_classificaiton.sh\
+      #bash run_graph_graph_classificaiton.sh 
+      #bash run_graph_link_prediction.sh 
+      #bash run_graph_node_classificaiton.sh 
+      #bash run_non-graph_graph_classificaiton.sh 
+      #bash run_non-graph_link_prediction.sh
+      #bash run_non-graph_node_classificaiton.sh
       ```
 
 <p align="center">
@@ -87,18 +87,18 @@ Download the ```TSP``` datasets using https://github.com/graphdeeplearning/bench
 
 ```
 #Gated-GCN base
-python main_TSP_edge_classification_best_model.py --dataset TSP \
---gpu_id 0 \
---config 'configs/TSP_edge_classification_GatedGCN_100k.json' --edge_feat True \
---batch_size 16 \
---max_time 60 \
+python main_TSP_edge_classification_best_model.py --dataset TSP 
+--gpu_id 0 
+--config 'configs/TSP_edge_classification_GatedGCN_100k.json' --edge_feat True 
+--batch_size 16 
+--max_time 60 
 
 #GAT base
-python main_TSP_edge_classification_best_model.py --dataset TSP \
---gpu_id 1 \
---config 'configs/TSP_edge_classification_GAT_edgereprfeat.json' --edge_feat True \
---batch_size 16 \
---max_time 60 \
+python main_TSP_edge_classification_best_model.py --dataset TSP 
+--gpu_id 1 
+--config 'configs/TSP_edge_classification_GAT_edgereprfeat.json' --edge_feat True 
+--batch_size 16 
+--max_time 60 
 ```
 
 
